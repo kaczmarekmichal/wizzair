@@ -93,6 +93,11 @@ class WizzairTest(unittest.TestCase):
         register_btn = self.driver.find_element_by_xpath("//button[@data-test='booking-register-submit']")
         register_btn.click()
 
+        # //span[@class='rf-input__error__message']//span[text()='Nieprawidłowy adres e-mail']
+
+        error_notice = self.driver.find_element_by_xpath("//span[@class='rf-input__error__message']/span[text()='Nieprawidłowy adres e-mail']")
+
+        error_notice.is_enabled()
 
 
 
