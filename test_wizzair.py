@@ -49,13 +49,28 @@ class WizzairTest(unittest.TestCase):
 
 
         if test_data.sex =='male':
-
             gender_switch = self.driver.find_element_by_xpath("//label[@for='register-gender-male']")
             self.driver.execute_script("arguments[0].click()",gender_switch)
         #wywołanie JS - nie można kliknac normalnie - element przykryty
         else:
             gender_switch = self.driver.find_element_by_xpath("//label[@for='register-gender-female']")
             self.driver.execute_script("arguments[0].click()",gender_switch)
+
+
+        mobile_phone_field = self.driver.find_element_by_xpath("//input[@name='mobilePhone']")
+        mobile_phone_field.send_keys(test_data.mobile_phone)
+
+        email_field = self.driver.find_element_by_xpath("//input[@data-test='booking-register-email']")
+        email_field.send_keys(test_data.email)
+
+        password_field = self.driver.find_element_by_xpath("//input[@data-test='booking-register-password']")
+        password_field.send_keys(test_data.password)
+
+        # //input[@data-test='booking-register-country']
+
+        country_register_field = self.driver.find_element_by_xpath("//input[@data-test='booking-register-country']")
+        country_register_field.send_keys(test_data.country)
+
 
 
 
