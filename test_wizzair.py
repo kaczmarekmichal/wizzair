@@ -2,6 +2,8 @@
 import unittest
 from selenium import webdriver
 import time
+import test_data
+
 
 class WizzairTest(unittest.TestCase):
 
@@ -39,9 +41,18 @@ class WizzairTest(unittest.TestCase):
         # rejestracja_btn.click()
 
         # input = self.driver.find_element_by_name("firstName")
-        input = self.driver.find_element_by_xpath("//input[@placeholder='Imię']")
-        input.send_keys("Dick")
+        name_field = self.driver.find_element_by_xpath("//input[@placeholder='Imię']")
+        name_field.send_keys(test_data.valid_name)
 
+        last_name_field = self.driver.find_element_by_xpath("//input[@placeholder='Nazwisko']")
+        last_name_field.send_keys(test_data.valid_surname)
+
+
+
+        gender_switch = self.driver.find_element_by_xpath("//label[@for='register-gender-male']")
+        self.driver.execute_script("arguments[0].click()",gender_switch)
+        # input.click()
+        #inny sposob - po label
 
         # input = self.driver.find_element_by_name("lastName")
         # input.send_keys("Dickinson")
