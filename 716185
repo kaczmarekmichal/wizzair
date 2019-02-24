@@ -51,6 +51,7 @@ class WizzairRegistartionTest(unittest.TestCase):
                 print(country)
                 d.location_once_scrolled_into_view
                 d.click()
+                break
         time.sleep(4)
 
 
