@@ -13,10 +13,13 @@ class WizzairTest(unittest.TestCase):
     def tearDown(self):
         self.driver.quit()
 
+
     def setUp(self):
         self.driver = webdriver.Chrome()
         self.driver.maximize_window()
         self.driver.get("https://wizzair.com/pl-pl#")
+        self.driver.implicitly_wait(15)
+        #zabezpieczenie do ladowania sie strony
 
 
     def test_wrong_email(self):
@@ -28,9 +31,9 @@ class WizzairTest(unittest.TestCase):
         # zaloguj_btns.click()
 
 
-        zaloguj_btn =self.driver.find_element_by_xpath("//button[@data-test='navigation-menu-signin']")
+        login_btn =self.driver.find_element_by_xpath("//button[@data-test='navigation-menu-signin']")
         #własny selctor na podstawie inspekcji strony w chromie - data-test poniewaz było jedne unikalne wystapienie
-        zaloguj_btn.click()
+        login_btn.click()
 
 
         rejestracja_btn =self.driver.find_element_by_xpath("//button[text()='Rejestracja']")
@@ -69,7 +72,26 @@ class WizzairTest(unittest.TestCase):
         # //input[@data-test='booking-register-country']
 
         country_register_field = self.driver.find_element_by_xpath("//input[@data-test='booking-register-country']")
-        country_register_field.send_keys(test_data.country)
+        # country_register_field.send_keys(test_data.country)
+        # - wysylanie reczne ponizej wybor z listy
+
+        country_register_field.click()
+        country_field = self.driver.find_element_by_xpath("//div[@class='register-form__country-container__locations']/label[164]")
+        country_field.location_once_scrolled_into_view
+        #scrollowanie do elementu niewidocznego
+        country_field.click()
+
+        # //div[@class='register-form__country-container__locations']/label[164]  - numer Polski w liście wyboru
+
+
+        # privacy_policy_checkbox = self.driver.find_element_by_xpath("//input[@name='privacyPolicy']") - wrong aproach - could not click
+        privacy_policy_checkbox = self.driver.find_element_by_xpath("//label[@for='registration-privacy-policy-checkbox']")
+        privacy_policy_checkbox.click()
+
+        # //button[@data-test='booking-register-submit']
+
+        register_btn = self.driver.find_element_by_xpath("//button[@data-test='booking-register-submit']")
+        register_btn.click()
 
 
 
