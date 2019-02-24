@@ -48,14 +48,15 @@ class WizzairTest(unittest.TestCase):
         last_name_field.send_keys(test_data.valid_surname)
 
 
+        if test_data.sex =='male':
 
-        gender_switch = self.driver.find_element_by_xpath("//label[@for='register-gender-male']")
-        self.driver.execute_script("arguments[0].click()",gender_switch)
-        # input.click()
-        #inny sposob - po label
+            gender_switch = self.driver.find_element_by_xpath("//label[@for='register-gender-male']")
+            self.driver.execute_script("arguments[0].click()",gender_switch)
+        #wywołanie JS - nie można kliknac normalnie - element przykryty
+        else:
+            gender_switch = self.driver.find_element_by_xpath("//label[@for='register-gender-female']")
+            self.driver.execute_script("arguments[0].click()",gender_switch)
 
-        # input = self.driver.find_element_by_name("lastName")
-        # input.send_keys("Dickinson")
 
 
         time.sleep(5)
