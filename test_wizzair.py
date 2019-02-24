@@ -95,9 +95,20 @@ class WizzairTest(unittest.TestCase):
 
         # //span[@class='rf-input__error__message']//span[text()='Nieprawidłowy adres e-mail']
 
-        error_notice = self.driver.find_element_by_xpath("//span[@class='rf-input__error__message']/span[text()='Nieprawidłowy adres e-mail']")
+        error_notice = self.driver.find_elements_by_xpath("//span[@class='rf-input__error__message']/span[text()='Nieprawidłowy adres e-mail']")
+        assert error_notice[1].is_displayed()
 
-        error_notice.is_enabled()
+        self.assertEqual(error_notice[1].get_attribute('innerText'), u'Nieprawidłowy adres e-mail')
+
+        self.driver.save_screenshot('koniec.png')
+
+        # error_notice = self.driver.find_elements_by_xpath("//div[@id='regmodal-scroll-hook-4']/div[2]/span/span")
+        # assert error_notice[0].is_enabled()
+
+        #/div/span[contains(text),'Nieprawidłowy adres e-mail']
+
+
+
 
 
 
