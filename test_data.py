@@ -2,6 +2,7 @@ valid_name='Dick'
 valid_surname='Laurent'
 sex='female'
 gender_switch='male'
+valid_gender ='male'
 mobile_phone = "512524524"
 valid_telephone = "5645644"
 invalid_mobile_phone ='1'

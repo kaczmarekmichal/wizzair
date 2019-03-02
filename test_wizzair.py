@@ -6,15 +6,35 @@ import test_data
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
+from ddt import ddt, data, unpack
+import csv
 
 
+def get_data(file_name):
+    # stworz pusta liste
+    file_name=names.csv
+    rows =[]
+    data_file = open(file_name, "rb")
+    reader = csv.reader(data_file)
+    next(reader, None)
+    for row in reader:
+        rows.append(row)
+    return rows
+
+@ddt
 class WizzairTest(unittest.TestCase):
 
     """
     Class for registartion on wizzair.com
     """
+
+
+
     def tearDown(self):
         self.driver.quit()
+
+
+
 
 
     def setUp(self):
@@ -351,30 +371,30 @@ class WizzairTest(unittest.TestCase):
         rejestracja_btn = driver.find_element_by_xpath("//button[text()='Rejestracja']")
         rejestracja_btn.click()
         name_field = driver.find_element_by_xpath('//input[@placeholder="Imię"]')
-        name_field.send_keys(test_data.valid_name)
+        name_field.send_keys(valid_name)
         surname_field = driver.find_element_by_xpath('//input[@placeholder="Nazwisko"]')
         surname_field.send_keys(valid_surname)
-        if valid_gender == 'male':
+        if test_data.valid_gender == 'male':
             gender_switch = driver.find_element_by_xpath("//label[@for='register-gender-male']")
             driver.execute_script("arguments[0].click()", gender_switch)
         else:
             gender_switch = driver.find_element_by_xpath("//label[@for='register-gender-female']")
             driver.execute_script("arguments[0].click()", gender_switch)
         telephone_field = driver.find_element_by_name("mobilePhone")
-        telephone_field.send_keys(valid_telephone)
+        telephone_field.send_keys(test_data.valid_telephone)
         email_field =  driver.find_element_by_css_selector("input[placeholder='E-mail'][data-test='booking-register-email']")
-        email_field.send_keys(valid_email)
+        email_field.send_keys(test_data.valid_email)
         password_field = driver.find_element_by_xpath("//input[@data-test='booking-register-password']")
-        password_field.send_keys(valid_password)
+        password_field.send_keys(test_data.valid_password)
         country_field = driver.find_element_by_xpath("//input[@data-test='booking-register-country']")
         country_field.click()
         country_to_choose = driver.find_element_by_xpath("//div[@class='register-form__country-container__locations']")
         countries = country_to_choose.find_elements_by_xpath("label")
-        print(valid_country)
+        print(test_data.valid_country)
         for label in countries:
             option=label.find_element_by_tag_name('strong')
             # print(d.text)
-            if option.get_attribute("innerText") == valid_country:
+            if option.get_attribute("innerText") == test_data.valid_country:
                 option.location_once_scrolled_into_view
                 option.click()
                 break
