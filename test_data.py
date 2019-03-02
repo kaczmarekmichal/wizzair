@@ -1,8 +1,13 @@
 valid_name='Dick'
 valid_surname='Laurent'
 sex='female'
+gender_switch='male'
 mobile_phone = "512524524"
+valid_telephone = "5645644"
 invalid_mobile_phone ='1'
+valid_email = "adam@wp.pl"
+valid_password ="DupaMamuta90"
+valid_country = "Polska"
 email ='adam@wp.pl'
 password = "DupaMamuta90"
 country="Polska"
