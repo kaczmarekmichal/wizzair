@@ -10,9 +10,10 @@ from ddt import ddt, data, unpack
 import csv
 
 
+
 def get_data(file_name):
     # stworz pusta liste
-    file_name=names.csv
+    file_name = names.csv
     rows =[]
     data_file = open(file_name, "rb")
     reader = csv.reader(data_file)
@@ -20,6 +21,7 @@ def get_data(file_name):
     for row in reader:
         rows.append(row)
     return rows
+
 
 @ddt
 class WizzairTest(unittest.TestCase):
@@ -32,9 +34,6 @@ class WizzairTest(unittest.TestCase):
 
     def tearDown(self):
         self.driver.quit()
-
-
-
 
 
     def setUp(self):
@@ -362,7 +361,8 @@ class WizzairTest(unittest.TestCase):
         # # privacy_policy_checkbox = self.driver.find_element_by_xpath("//input[@name='privacyPolicy']") - wrong aproach - could not click
         # privacy_policy_checkbox = self.driver.find_element_by_xpath("//label[@for='registration-privacy-policy-checkbox']")
         # privacy_policy_checkbox.click()
-
+    @data(*get_data("names.csv"))
+    @unpack
     def test_valid_registration(self):
 
         driver = self.driver
